@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+}
+
+header {
+    height: 14vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(208, 228, 218);
+    font-size: 2.7rem;
+}
+
+.container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+    margin: 3rem 0;
+    padding: 0 20px;
+    background-color: rgb(208, 228, 218);
+    border-top: 1px solid rgb(201, 200, 200);
+    border-bottom: 1px solid rgb(201, 200, 200);
+}
+
+label {
+    /* display: inline-block; */
+    /* width: 20%; */
+    padding: 1em 1.35714em;
+}
+
+input,
+textarea {
+    /* width: 80%; */
+    margin: 1.5rem auto;
+    padding: 1em 1.35714em;
+    line-height: normal;
+    border: 1px solid #dcdcdc;
+    border-bottom-color: #cfcfcf;
+    font-size: 0.93333em;
+    color: inherit;
+    background: #fff;
+}
+
+button {
+    margin: 1.5rem 1rem;
+    padding: 1em 1.35714em;
+    border: 0;
+    outline: none;
+    font-size: 0.93333em;
+    letter-spacing: 0.1em;
+    line-height: normal;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: rgb(44, 43, 48);
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(86, 94, 90, 0.7);
+    /* transition: 1.2s ease-in-out; */
+}
+
+.box__image-modal {
+    width: 80%;
+    height: 90vh;
+    margin: auto 10%;
+    /* padding: 1rem; */
+    border: 3px solid rgb(208, 228, 218);
+    position: fixed;
+    top: 5vh;
+    background-color: white;
+    overflow-y: auto;
+}
+.close {
+    text-align: right;
+    padding: 20px 20px;
+}
+
+.image-modal {
+    display: block;
+    width: 100%;
+    height: 350px;
+    object-fit: contain;
+    /* margin-left: 10%; */
+}
+
+.tags {
+    background-color: rgb(208, 228, 218);
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    line-height: 2.2rem;
+}
+.tag {
+    display: inline-block;
+    margin-right: 1rem;
+    cursor: hand;
+    letter-spacing: 0.15rem;
+}
+.tag-underline {
+    text-decoration: underline;
+    display: inline-block;
+    margin-right: 12px;
+
+    letter-spacing: 0.15rem;
+}
+
+.title-modal {
+    margin: 1rem;
+    font-size: 2.5rem;
+}
+
+.text-modal {
+    text-align: center;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.decription-modal {
+    font-size: 1.5rem;
+    margin: 0.5rem auto;
+    width: 80%;
+}
+
+.user-info {
+    margin: 0.5rem 0.5rem;
+    color: lightgray;
+}
+
+.form-comments {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    padding: 0 20px;
+    background-color: rgb(208, 228, 218);
+    border-top: 1px solid rgb(201, 200, 200);
+    border-bottom: 1px solid rgb(201, 200, 200);
+}
+
+.comment {
+    width: 48%;
+    padding: 1rem;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.inputfile + label {
+    margin: 1.5rem 1rem;
+    /* font-size: 1.25em;
+    font-weight: 700; */
+    color: black;
+    background-color: white;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: rgb(103, 112, 107);
+    color: white;
+}
+
+.inputfile:focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+/* ___________________________Grid */
+
+.title {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    color: rgba(0, 0, 0, 0.9);
+    font-family: "Oswald", sans-serif;
+    font-weight: 200;
+    font-size: 24px;
+    padding: 12px;
+    text-align: center;
+}
+.grid__image:hover .title {
+    color: rgb(44, 48, 46);
+    background-color: rgba(255, 255, 255, 1);
+}
+.grid__image:hover {
+    border: 1px solid rgba(201, 200, 200, 0.5);
+}
+
+.container__grid {
+    width: 90%;
+    margin: 3rem auto;
+}
+.grid {
+    display: grid;
+    grid-gap: 9px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    grid-auto-rows: 300px;
+}
+.grid__image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    filter: brightness(90%);
+    transition: all 0.7s;
+}
+.grid__image {
+    position: relative;
+    max-width: 450px;
+}
+.grid__image:hover img {
+    filter: brightness(100%);
+}
+.grid__image:nth-child(2n):not(:last-of-type) {
+    grid-row-end: span 2;
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title></title>
+</head>
+
+<body>
+
+    <header>
+        <h1>BIRDS IN  YOUR VUE</h1>
+    </header>
+
+    <main id="main">
+        <div class="form">
+            <div class="input">
+                <label for="title">Title </label>
+                <input type="text" v-model="title" name="title">
+            </div>
+            <div class="input">
+                <label for="username">Username </label>
+                <input type="text" v-model="username" name="username" >
+            </div>
+            <div class="input">
+                <label for="description">Description </label>
+                <input type="text" v-model="description" name="description" >
+            </div>
+            <div class="input">
+                <label for="tags">Keywords</label>
+                <input type="text" v-model="tags" name="tags" placeholder="keyword_1, keyword_2 ">
+            </div>
+            <div class="input">
+                <input id="file" class="inputfile" name="file" type="file"
+                    ref="fileupload" accept="image/*" @change="setFile">
+                <label for="file"><span>Select Image</span></label>
+            </div>
+            <button v-on:click="upload">Upload Image</button>
+        </div>
+        <div v-if="error" class="container">
+            <h3 >Sorry, found no image for your request.</h3>
+        </div>
+         <div v-if="tag" class="container">
+
+            <p class="back" @click="allBirds">→ back to all</p>
+        </div>
+        <div v-if="tag" class="container">
+            <h3 >All images with keyword {{tag.toUpperCase()}}</h3>
+        </div>
+        <div class="container__grid">
+            <div class="grid">
+                <!-- looping over things in vue -->
+
+                    <div class="grid__image" v-if="images"
+                        v-for="image in images">
+                        <img :key="image.id" :src="image.url" :alt="image.title"
+                            @click="selecteImage(image.id)">
+                        <h3 class="title">{{image.title}}</h3>
+                    </div>
+
+            </div>
+        </div>
+
+        <modal v-if="selectedImageId" :id="selectedImageId"
+            @remove="handleRemove" @sort="handleSort"></modal>
+        <div v-if="showMore" class="container">
+            <button  @click="showmore">Show more</button>
+        </div>
+        <div v-if="showMoreByTag" class="container">
+
+            <button  @click="showmorebytag">Show more of
+                {{tag}}</button>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="/js/app.js" type="module"
+        crossorigin="use-credentials"></script>
+
+    <script src="/js/custom.js"></script>
+
+
+</body>
+
+</html>
