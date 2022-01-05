@@ -114,7 +114,6 @@ app.get("/tags/:id", (req, res) => {
 
 
 app.get("/comments/:id", (req, res) => {
-    console.log("/comments.json", req.params.id);
     const imageId = req.params.id;
     db.getCommentsByImageId(imageId)
         .then(({ rows }) => {
@@ -142,18 +141,15 @@ app.post("/comments", (req, res) => {
 
 
 app.post('/upload', uploader.single("file"), s3.upload, (req, res) => {
-    console.log("*****************");
-    console.log("POST /upload Route");
-    console.log("*****************");
+    // console.log("*****************");
+    // console.log("POST /upload Route");
+    // console.log("*****************");
 
 
     if (req.file) {
         // once we're successfully uploaded to the cloud, we want to
         // add a new image to the database!
         const { username, title, description, tags } = req.body;
-        // const username = req.body.username;
-        // const title = req.body.title;
-        // const description = req.body.description;
 
         const aws = "https://s3.amazonaws.com/";
         const bucket = "spicedling/";
@@ -163,25 +159,16 @@ app.post('/upload', uploader.single("file"), s3.upload, (req, res) => {
 
         db.addImage({ username, title, description, url })
             .then(({ rows }) => {
-                console.log("rows", rows);
-                console.log("rows[0].id", rows[0].id);
-                console.log("tatagsArrgs", tagsArr);
                 if (tagsArr) {
                     for (let i = 0; i < tagsArr.length; i++) {
-                        console.log(i);
                         db.addTags(rows[0].id, tagsArr[i])
                             .then(console.log("tags are in"))
                             .catch(err => console.log("error in addTags", err));
                     }
                 }
-
                 return res.json(rows[0]);
-
-
             })
             .catch(err => console.log("error in addImage", err));
-
-        // db.addTags()
 
     } else {
         res.json({

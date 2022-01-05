@@ -22,12 +22,10 @@ Vue.createApp({
     },
     methods: {
         selecteImage(imageId) {
-            console.log("imageId", imageId);
             this.selectedImageId = imageId;
             history.pushState({}, "", `/${this.selectedImageId}`);
         },
         setFile(e) {
-            console.log(e.target.files[0]);
             this.file = e.target.files[0];
         },
         upload() {
@@ -44,7 +42,6 @@ Vue.createApp({
             })
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log("images from server:", data);
                     this.images.unshift(data);
                 });
             this.resetForm();
@@ -56,9 +53,7 @@ Vue.createApp({
             fetch(`/moreimages/${lowestIdOnScreen}`)
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log("images from server:", data);
                     for (let i = 0; i < data.length; i++) {
-
                         this.images.push(data[i]);
                         if (data[i].id === data[i].lowestId) {
                             this.showMore = false;
@@ -72,7 +67,6 @@ Vue.createApp({
             fetch(`/moreimagesbytag/${lowestIdOnScreen}&${this.tag}`)
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log("moreimagesbytag from server:", data);
                     if (data == "") {
                         this.showMoreByTag = false;
                     }
@@ -94,7 +88,6 @@ Vue.createApp({
             this.$refs.fileupload.value = null;
         },
         handleRemove(a) {
-            console.log("handleRemove");
             this.selectedImageId = "";
             history.pushState({}, "", `/`);
             if (a == "error") {
@@ -103,14 +96,12 @@ Vue.createApp({
             }
         },
         handleSort(a) {
-            console.log("handleSort");
             this.tag = `${a}`;
             this.selectedImageId = "";
             history.pushState({}, "", `/${a}`);
             fetch(`/alltags/${a}`)
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log("images from server:", data);
                     this.images = data;
                 });
 
@@ -122,8 +113,6 @@ Vue.createApp({
             fetch(`/delete/${id}`)
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log("deleted image:", data);
-                    // this.images.unshift(data);
                     let deletedImage = this.images.filter((item) => item.id == data.id);
                     this.images.splice(deletedImage, 1);
                 });
@@ -138,29 +127,21 @@ Vue.createApp({
             fetch("/images.json")
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log("images from server:", data);
                     this.images = data;
                 });
 
-            // window.addEventListener('popstate', (e) => {
-            //     console.log(e.state);
-            //     this.selectedImageId = location.pathname.slice(1);
-            // });
         }
     },
     mounted: function () {
-        console.log("vue app just mounted");
         fetch("/images.json")
             .then((data) => data.json())
             .then((data) => {
-                console.log("images from server:", data);
                 this.images = data;
                 this.error = "";
             });
 
 
         window.addEventListener('popstate', (e) => {
-            console.log(e.state);
             this.selectedImageId = location.pathname.slice(1);
             this.error = "";
         });

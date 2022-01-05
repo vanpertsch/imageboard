@@ -9,11 +9,9 @@ export default {
     },
     props: ['id'],
     mounted() {
-        console.log("comments just mounted id", this.id);
         fetch(`/comments/${this.id}`)
             .then((data) => data.json())
             .then((data) => {
-                console.log("images from server:", data);
                 this.comments = data;
 
             }).catch(error => console.log(error));
@@ -27,7 +25,6 @@ export default {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: JSON.stringify(
                     {
@@ -39,7 +36,6 @@ export default {
             })
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log("comments from server:", data);
                     this.comments.unshift(data);
                 });
             this.resetForm();
@@ -64,7 +60,7 @@ export default {
             <button @click="postcomment">Post Comment</button>
         </div>
           <div class="comments">
-            <!-- looping over things in vue -->
+
             <div class="comment" v-if="comments" v-for="comment in comments">
             <p>{{comment.comment}}</p>
             <span class="user-info">{{comment.username}}</span>
@@ -73,4 +69,4 @@ export default {
     </div>
 
     `,
-}
+};

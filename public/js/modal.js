@@ -41,7 +41,6 @@ export default {
         fetch(`/tags/${this.id}`)
             .then((data) => data.json())
             .then((data) => {
-                console.log("tags from server:", data);
                 this.tags = data;
             });
 
