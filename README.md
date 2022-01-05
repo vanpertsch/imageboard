@@ -1,8 +1,12 @@
 # imageboard
 
-Single-Page Application website where anyone can post image of their choosing, add a title and description and usefull tags. Images may be deleted. It is possible to comment on a selected image. Images can be sorted by tag.
+Single-Page Application website where anyone can post images of their choosing, add a title and description and useful tags. Images may be deleted. It is possible to comment on a selected image. Images can be sorted by tags.
 
 🐦 The theme of this imageboard is "Birds in your vue".
+
+## Stack
+
+PostgreSQL, Express, Vue ,Node, AWS S3
 
 ## Development
 
