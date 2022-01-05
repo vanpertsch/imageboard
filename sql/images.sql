@@ -15,16 +15,15 @@ CREATE TABLE comments(
     id SERIAL PRIMARY KEY,
     username VARCHAR NOT NULL,
     comment TEXT NOT NULL,
-    image_id INT NOT NULL REFERENCES images(id) ,
+    image_id INT NOT NULL REFERENCES images(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE tags(
     id SERIAL PRIMARY KEY,
     tag TEXT,
-    image_id INT NOT NULL REFERENCES images(id)
+    image_id INT NOT NULL REFERENCES images(id) ON DELETE CASCADE
 );
-
 
 
 
