@@ -54,6 +54,14 @@ app.get("/moreimages/:id", (req, res) => {
         })
         .catch(err => console.log("err in getmoreImages/:id", err));
 });
+app.get("/delete/:id", (req, res) => {
+    const lastid = req.params.id;
+    db.deleteImage(lastid)
+        .then(({ rows }) => {
+            return res.json(rows[0]);
+        }).catch(err => console.log("err in deleteImage", err));
+
+});
 
 app.get("/moreimagesbytag/:id&:tag", (req, res) => {
     const lastid = req.params.id;

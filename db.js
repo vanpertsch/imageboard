@@ -26,6 +26,16 @@ module.exports.addTags = (image_id, tag) => {
     return db.query(q, params);
 };
 
+// ---------------------Delete--------------------------------------------------
+
+module.exports.deleteImage = (id) => {
+    const q = `DELETE FROM images WHERE id = ${id} RETURNING *`;
+    return db.query(q);
+};
+
+
+
+
 // ---------------------GET--------------------------------------------------
 module.exports.getImages = () => {
     const q = `SELECT * FROM images ORDER BY created_at DESC LIMIT 6`;
@@ -55,6 +65,7 @@ module.exports.getImageById = (id) => {
     const q = `SELECT * FROM images WHERE id = ${id}`;
     return db.query(q);
 };
+
 module.exports.getCommentsByImageId = (id) => {
     const q = `SELECT * FROM comments WHERE image_id = ${id}`;
     return db.query(q);

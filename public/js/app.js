@@ -118,6 +118,18 @@ Vue.createApp({
             this.showMoreByTag = true;
 
         },
+        handleDelete(id) {
+            fetch(`/delete/${id}`)
+                .then((data) => data.json())
+                .then((data) => {
+                    console.log("deleted image:", data);
+                    // this.images.unshift(data);
+                    let deletedImage = this.images.filter((item) => item.id == data.id);
+                    this.images.splice(deletedImage, 1);
+                });
+            this.handleRemove();
+            history.pushState({}, "", `/`);
+        },
         allBirds() {
             this.tag = "";
             this.showMoreByTag = false;

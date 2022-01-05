@@ -55,7 +55,7 @@ export default {
                 </div>
 
                 <img class="image-modal" :src="imageUrl" :alt="title">
-
+           <button @click="deleteRecord(id)">Delete Record</button>
                  <div class="tags"><span class="tag">TAGS:</span>
                 <span class="tag-underline" v-if="tags" v-for="tag in tags" @click="showImagesByTag(tag.tag)">{{tag.tag}}</span>
             </div>
@@ -76,7 +76,12 @@ export default {
         },
         showImagesByTag(a) {
             this.$emit('sort', a);
+        },
+        deleteRecord(id) {
+
+
+            this.$emit('delete', id);
         }
 
     }
-}
+};

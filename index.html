@@ -63,7 +63,7 @@
         </div>
 
         <modal v-if="selectedImageId" :id="selectedImageId"
-            @remove="handleRemove" @sort="handleSort"></modal>
+            @remove="handleRemove" @sort="handleSort" @delete="handleDelete"></modal>
         <div v-if="showMore" class="container">
             <button  @click="showmore">Show more</button>
         </div>
